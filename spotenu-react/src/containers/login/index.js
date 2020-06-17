@@ -6,7 +6,7 @@ import { Button, Typography } from "@material-ui/core";
 const Login = () => {
   return (
     <div>
-      <Header />
+      <Header buttonName="register" />
       <Typography>Faça Login</Typography>
       <FormDiv>
         <FormLogin>

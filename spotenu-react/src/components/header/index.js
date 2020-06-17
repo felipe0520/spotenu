@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { Box } from "@material-ui/core";
 
 const Header = (props) => {
-  const hendleGoToRegister = () => {
+  const handleGoToLogin = () => {
     props.goToLogin();
   };
 
@@ -22,13 +22,17 @@ const Header = (props) => {
             <Typography variant="h6">Bem vindo</Typography>
           </Box>
           <Box>
-            {props.login ? (
-              <Button color="inherit" onClick={hendleGoToRegister}>
+            {props.buttonName === "login" ? (
+              <Button color="inherit" onClick={handleGoToLogin}>
                 Login
+              </Button>
+            ) : props.buttonName === "register" ? (
+              <Button color="inherit" onClick={handleGoToRegister}>
+                Cadastro
               </Button>
             ) : (
               <Button color="inherit" onClick={handleGoToRegister}>
-                Cadastro
+                Logout
               </Button>
             )}
           </Box>

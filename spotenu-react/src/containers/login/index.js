@@ -11,7 +11,7 @@ const Login = () => {
       <FormDiv>
         <FormLogin>
           <FormInput label="email ou nickname" required={true} />
-          <FormInput label="password" required={true} />
+          <FormInput label="password" required={true} type="password" />
           <Button type="submit" color="primary">
             Login
           </Button>

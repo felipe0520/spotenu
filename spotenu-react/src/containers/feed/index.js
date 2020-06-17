@@ -1,13 +1,19 @@
 import React from "react";
-import { FeedWrapper, Teste } from "./styled";
-
+import { FeedWrapper, Test } from "./styled";
+import Header from "../../components/header/";
+import Footer from "../../components/footer";
+import PermanentDrawerLeft from "../../components/drawerLateral";
 const Feed = () => {
   return (
-    <FeedWrapper>
-      <Teste>teste</Teste>
-      <Teste>teste</Teste>
-      <Teste>teste</Teste>
-    </FeedWrapper>
+    <div>
+      <Header />
+      <FeedWrapper>
+        <PermanentDrawerLeft />
+        <Test />
+        <Test />
+      </FeedWrapper>
+      <Footer />
+    </div>
   );
 };
 

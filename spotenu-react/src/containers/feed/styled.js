@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const FeedWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr, 4fr, 1fr;
-  border: 10px solid red;
-  height: 100vh;
+  grid-template-columns: 1fr 5fr 1fr;
+  border: 1px solid red;
+  height: 77vh;
 `;
 
-export const Teste = styled.div`
-  border: 10px solid, green;
+export const Test = styled.div`
+  border: 1px solid black;
 `;

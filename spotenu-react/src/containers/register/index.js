@@ -19,7 +19,7 @@ const Register = () => {
 
   return (
     <div>
-      <Header login />
+      <Header buttonName="login" />
       <Typography>Cadastre-se</Typography>
       <FormDivRegister>
         <FormRegister onSubmit={handleSubmit}>

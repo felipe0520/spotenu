@@ -44,6 +44,7 @@ const Register = () => {
             name="password"
             onChange={handleChange}
             value={name.value}
+            type="password"
           />
           {name.userType === "band" && (
             <FormInputRegister

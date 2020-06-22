@@ -1,0 +1,42 @@
+import { Request, Response } from "express";
+import { SingUpBusiness } from "../../business/singUp/SingUpBusiness";
+import { HashGenerator } from "../../services/HashGenerator";
+import { UserDataBase } from "../../database/UserDataBase";
+import { TokenGenerator } from "../../services/TokenGenerator";
+import { idGenerator } from "../../services/IdGenerator";
+
+export class SingUpController {
+  private static singUpBusiness = new SingUpBusiness(
+    new UserDataBase(),
+    new HashGenerator(),
+    new TokenGenerator(),
+    new idGenerator()
+  );
+  public async signUp(req: Request, res: Response) {
+    const user = {
+      name: req.body.name,
+      nickname: req.body.nickname,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
+      description: req.body.description,
+    };
+    try {
+      const result = await SingUpController.singUpBusiness.signup({
+        name: user.name,
+        nickname: user.nickname,
+        email: user.email,
+        password: user.password,
+        role: user.role,
+        description: user.description,
+      });
+      res.status(200).send(result);
+      new UserDataBase().distroyConnection();
+    } catch (error) {
+      {
+        res.status(400).send({ message: error.message });
+      }
+      new UserDataBase().distroyConnection();
+    }
+  }
+}

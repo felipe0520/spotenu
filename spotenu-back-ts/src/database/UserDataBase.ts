@@ -2,13 +2,29 @@ import { BaseDataBase } from "./BaseDataBase";
 import { User } from "../model/User";
 
 export class UserDataBase extends BaseDataBase {
-  protected static TABLE_NAME = "Users";
+  protected static TABLE_NAME = "User";
 
-  public singup(user: User) {
-    this.getConnection().raw(`
+  private toModel(dbModel?: any): User | undefined {
+    return (
+      dbModel &&
+      new User(
+        dbModel.name,
+        dbModel.nickname,
+        dbModel.email,
+        dbModel.password,
+        dbModel.id,
+        dbModel.role,
+        dbModel.aproved,
+        dbModel.description
+      )
+    );
+  }
+
+  public async singup(user: User) {
+    await this.getConnection().raw(`
     INSERT INTO ${
       UserDataBase.TABLE_NAME
-    } (id, name, nickname, password, email, description, role)
+    } (id, name, nickname, password, email, description, role,aproved)
     VALUES(
         "${user.getId()}",
         "${user.getName()}",
@@ -16,8 +32,19 @@ export class UserDataBase extends BaseDataBase {
         "${user.getPassword()}",
         "${user.getEmail()}",
         "${user.getDescription()}",
-        "${user.getRole()}"
+        "${user.getRole()}",
+        "${user.getAproved()}"
     )
     `);
+  }
+
+  public async getUserByEmailOrNickname(
+    input: string
+  ): Promise<User | undefined> {
+    const result = await this.getConnection().raw(`
+      SELECT * from ${UserDataBase.TABLE_NAME} 
+      WHERE nickname = '${input}' or email = '${input}'
+      `);
+    return this.toModel(result[0][0]);
   }
 }

@@ -5,6 +5,7 @@ export abstract class BaseDataBase {
   private static connection: Knex | null = null;
 
   protected getConnection(): Knex {
+    console.log(BaseDataBase.connection === null);
     if (BaseDataBase.connection === null) {
       BaseDataBase.connection = knex({
         client: "mysql",
@@ -25,5 +26,6 @@ export abstract class BaseDataBase {
     if (BaseDataBase.connection) {
       await BaseDataBase.connection.destroy();
     }
+    BaseDataBase.connection = null;
   }
 }

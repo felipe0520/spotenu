@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export class TokenGeneration {
+export class TokenGenerator {
   public generation(input: AuthenticationData): string {
     const token = jsonwebtoken.sign(
       {

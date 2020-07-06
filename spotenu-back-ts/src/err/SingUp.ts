@@ -8,7 +8,6 @@ export const validatorSingUp = (user: User) => {
     !validator.toString(user.getRole()) ||
     !validator.isUUID(user.getId(), 4)
   ) {
-    console.log("fui chamado");
     throw new Error("Invalid input");
   }
 };

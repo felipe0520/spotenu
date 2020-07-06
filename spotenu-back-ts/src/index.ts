@@ -15,3 +15,5 @@ const server = app.listen(3003, () => {
     console.error(`Falha ao rodar o servidor.`);
   }
 });
+
+export default app;

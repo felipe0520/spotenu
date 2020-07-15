@@ -3,6 +3,7 @@ import { HashGenerator } from "../../services/HashGenerator";
 import { UserDataBase } from "../../database/UserDataBase";
 import { TokenGenerator } from "../../services/TokenGenerator";
 import { LoginBusiness } from "../../business/login/LoginBusiness";
+const functions = require("firebase-functions");
 
 export class LoginController {
   private static loginBusiness = new LoginBusiness(

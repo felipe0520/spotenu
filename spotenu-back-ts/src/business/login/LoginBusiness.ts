@@ -18,19 +18,9 @@ export class LoginBusiness {
       userData.nameOrNickname
     );
 
-    console.log(user);
-
     if (!user) {
       throw new Error("name or password invalid");
     }
-
-    console.log(
-      "result ",
-      await this.hashGeneration.compareHash(
-        userData.password,
-        user.getPassword()
-      )
-    );
 
     if (
       !(await this.hashGeneration.compareHash(

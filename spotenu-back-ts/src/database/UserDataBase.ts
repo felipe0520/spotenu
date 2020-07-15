@@ -1,5 +1,5 @@
 import { BaseDataBase } from "./BaseDataBase";
-import { User } from "../model/User";
+import { User, UserRole } from "../model/User";
 
 export class UserDataBase extends BaseDataBase {
   protected static TABLE_NAME = "User";
@@ -46,5 +46,15 @@ export class UserDataBase extends BaseDataBase {
       WHERE nickname = '${input}' or email = '${input}'
       `);
     return this.toModel(await result[0][0]);
+  }
+
+  public async getBands(): Promise<User | undefined> {
+    const result = await this.getConnection().raw(`
+      SELECT * from ${UserDataBase.TABLE_NAME} 
+      WHERE role = '${UserRole.BANDA}'
+      `);
+    return result[0].map((el: any) => {
+      return this.toModel(el);
+    });
   }
 }

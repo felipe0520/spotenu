@@ -17,3 +17,9 @@ export const validatorPassword = (pass: string, num: number) => {
     throw new Error("Invalid input");
   }
 };
+
+export const validatorDescriptionBand = (description: string | undefined) => {
+  if (!description) {
+    throw new Error("band description required");
+  }
+};

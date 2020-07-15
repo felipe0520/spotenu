@@ -23,7 +23,6 @@ export abstract class BaseDataBase {
   }
 
   public async distroyConnection(): Promise<void> {
-    console.log("distroy conection foi chamado?");
     if (BaseDataBase.connection) {
       await BaseDataBase.connection.destroy();
     }

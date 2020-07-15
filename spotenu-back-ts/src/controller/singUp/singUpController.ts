@@ -21,6 +21,7 @@ export class SingUpController {
       role: req.body.role,
       description: req.body.description,
     };
+
     try {
       const result = await SingUpController.singUpBusiness.signup({
         name: user.name,
@@ -30,7 +31,7 @@ export class SingUpController {
         role: user.role,
         description: user.description,
       });
-      res.status(200).send(result);
+      res.status(200).send({ token: result });
       new UserDataBase().distroyConnection();
     } catch (error) {
       {

@@ -1,7 +1,7 @@
 import { HashGenerator } from "../../services/HashGenerator";
 import { UserDataBase } from "../../database/UserDataBase";
 import { TokenGenerator } from "../../services/TokenGenerator";
-import { validatorLogin } from "../../err/Login";
+import { validatorLogin } from "../../validator/Login";
 import { TypeUserLogin } from "./typeLogin";
 
 export class LoginBusiness {
@@ -32,7 +32,7 @@ export class LoginBusiness {
     }
 
     if (user.getAproved() === 0) {
-      throw new Error("you not permission");
+      throw new Error("you not approved");
     }
 
     const token = this.tokenGenerator.generation({

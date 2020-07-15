@@ -3,6 +3,7 @@ import { HashGenerator } from "../../services/HashGenerator";
 import { UserDataBase } from "../../database/UserDataBase";
 import { TokenGenerator } from "../../services/TokenGenerator";
 import { LoginBusiness } from "../../business/login/LoginBusiness";
+const functions = require("firebase-functions");
 
 export class LoginController {
   private static loginBusiness = new LoginBusiness(
@@ -21,12 +22,13 @@ export class LoginController {
         password: user.password,
       });
       res.status(200).send(result);
+      new UserDataBase().distroyConnection();
     } catch (error) {
       {
         res.status(400).send({ message: error.message });
+        new UserDataBase().distroyConnection();
       }
     }
-    new UserDataBase().distroyConnection();
   }
 }
 

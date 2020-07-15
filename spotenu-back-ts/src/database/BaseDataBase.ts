@@ -1,28 +1,29 @@
 import Knex from "knex";
 import knex from "knex";
+const functions = require("firebase-functions");
 
 export abstract class BaseDataBase {
   private static connection: Knex | null = null;
 
   protected getConnection(): Knex {
-    console.log(BaseDataBase.connection === null);
     if (BaseDataBase.connection === null) {
       BaseDataBase.connection = knex({
         client: "mysql",
         connection: {
-          host: process.env.DB_HOST,
-          port: Number(process.env.PORT || "3306"),
-          user: process.env.DB_USER,
-          password: process.env.DB_PASSWORD,
-          database: process.env.DB_DATABASE_NAME,
+          host: functions.config().db.host,
+          port: Number("3306"),
+          user: functions.config().db.user,
+          password: functions.config().db.password,
+          database: functions.config().db.database.name,
         },
       });
     }
-
+    BaseDataBase.connection === null;
     return BaseDataBase.connection;
   }
 
   public async distroyConnection(): Promise<void> {
+    console.log("distroy conection foi chamado?");
     if (BaseDataBase.connection) {
       await BaseDataBase.connection.destroy();
     }

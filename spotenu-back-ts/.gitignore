@@ -11,3 +11,9 @@
 node_modules
 .env
 build
+lambda.zip
+firebase.json
+.firebaserc
+functions
+.runtimeconfig.json
+ui-debug.log

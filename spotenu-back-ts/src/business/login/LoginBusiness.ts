@@ -17,6 +17,7 @@ export class LoginBusiness {
     const user = await this.userDataBase.getUserByEmailOrNickname(
       userData.nameOrNickname
     );
+
     if (!user) {
       throw new Error("name or password invalid");
     }

@@ -45,6 +45,6 @@ export class UserDataBase extends BaseDataBase {
       SELECT * from ${UserDataBase.TABLE_NAME} 
       WHERE nickname = '${input}' or email = '${input}'
       `);
-    return this.toModel(result[0][0]);
+    return this.toModel(await result[0][0]);
   }
 }

@@ -4,7 +4,11 @@ import { UserDataBase } from "../../database/UserDataBase";
 import { TokenGenerator } from "../../services/TokenGenerator";
 import { idGenerator } from "../../services/IdGenerator";
 import { User, stringToUserRole, UserRole } from "../../model/User";
-import { validatorSingUp, validatorPassword } from "../../err/SingUp";
+import {
+  validatorSingUp,
+  validatorPassword,
+  validatorDescriptionBand,
+} from "../../validator/SingUp";
 
 export class SingUpBusiness {
   constructor(
@@ -39,19 +43,28 @@ export class SingUpBusiness {
       validatorSingUp(user);
     }
 
-    if (role !== UserRole.ADMIN) {
+    if (role === UserRole.USER) {
       validatorPassword(dataUser.password, 6);
       validatorSingUp(user);
     }
+    if (role === UserRole.BANDA) {
+      validatorPassword(dataUser.password, 6);
+      validatorSingUp(user);
+      validatorDescriptionBand(dataUser.description);
+    }
     await this.userDataBase.singup(user);
 
-    const token = this.tokenGenerator.generation({
-      id: user.getId(),
-      role: user.getRole(),
-    });
+    let token;
 
-    return user.getRole() !== UserRole.ADMIN
-      ? { token }
-      : { message: "wait for approval" };
+    if (user.getAproved() === 1) {
+      token = this.tokenGenerator.generation({
+        id: user.getId(),
+        role: user.getRole(),
+      });
+    } else {
+      token = "waiting for approval";
+    }
+
+    return token;
   }
 }

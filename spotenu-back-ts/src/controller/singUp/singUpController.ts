@@ -20,6 +20,7 @@ export class SingUpController {
       password: req.body.password,
       role: req.body.role,
       description: req.body.description,
+      authorization: req.headers.authorization,
     };
 
     try {
@@ -30,6 +31,7 @@ export class SingUpController {
         password: user.password,
         role: user.role,
         description: user.description,
+        authorization: user.authorization,
       });
       res.status(200).send({ token: result });
       new UserDataBase().distroyConnection();

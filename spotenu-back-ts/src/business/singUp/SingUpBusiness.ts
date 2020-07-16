@@ -34,11 +34,18 @@ export class SingUpBusiness {
       hash,
       id,
       role,
-      role === UserRole.ADMIN ? 0 : 1,
+      role === UserRole.BANDA ? 0 : 1,
       description
     );
 
     if (role === UserRole.ADMIN) {
+      if (!dataUser.authorization) {
+        throw new Error("token is empty");
+      }
+      const token = this.tokenGenerator.verify(dataUser.authorization);
+      if (token.role !== UserRole.ADMIN) {
+        throw new Error("only for administrators");
+      }
       validatorPassword(dataUser.password, 10);
       validatorSingUp(user);
     }

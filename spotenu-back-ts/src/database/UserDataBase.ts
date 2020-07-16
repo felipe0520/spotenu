@@ -57,4 +57,26 @@ export class UserDataBase extends BaseDataBase {
       return this.toModel(el);
     });
   }
+
+  public async approvedBand(id: string): Promise<string> {
+    const bandDb = await this.getConnection().raw(`
+    SELECT * from ${UserDataBase.TABLE_NAME} 
+      WHERE id = '${id}'
+    `);
+    const band = this.toModel(await bandDb[0][0]);
+
+    if (!band) {
+      throw new Error("band is not exist");
+    }
+
+    if (band.getAproved() === 1) {
+      throw new Error("band already approved");
+    }
+
+    await this.getConnection().raw(`
+      UPDATE ${UserDataBase.TABLE_NAME} 
+      SET aproved = 1 WHERE id = '${id}' 
+      `);
+    return "band successfully approved";
+  }
 }

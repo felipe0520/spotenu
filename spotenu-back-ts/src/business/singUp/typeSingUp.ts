@@ -5,4 +5,5 @@ export type TypeUser = {
   password: string;
   role: string;
   description?: string;
+  authorization?: string;
 };

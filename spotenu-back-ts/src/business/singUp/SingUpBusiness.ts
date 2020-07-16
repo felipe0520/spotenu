@@ -2,7 +2,7 @@ import { TypeUser } from "./typeSingUp";
 import { HashGenerator } from "../../services/HashGenerator";
 import { UserDataBase } from "../../database/UserDataBase";
 import { TokenGenerator } from "../../services/TokenGenerator";
-import { idGenerator } from "../../services/IdGenerator";
+import { IdGenerator } from "../../services/IdGenerator";
 import { User, stringToUserRole, UserRole } from "../../model/User";
 import {
   validatorSingUp,
@@ -15,7 +15,7 @@ export class SingUpBusiness {
     private userDataBase: UserDataBase,
     private hashGeneration: HashGenerator,
     private tokenGenerator: TokenGenerator,
-    private idGenerator: idGenerator
+    private idGenerator: IdGenerator
   ) {}
 
   public async signup(dataUser: TypeUser) {

@@ -3,14 +3,14 @@ import { SingUpBusiness } from "../../business/singUp/SingUpBusiness";
 import { HashGenerator } from "../../services/HashGenerator";
 import { UserDataBase } from "../../database/UserDataBase";
 import { TokenGenerator } from "../../services/TokenGenerator";
-import { idGenerator } from "../../services/IdGenerator";
+import { IdGenerator } from "../../services/IdGenerator";
 
 export class SingUpController {
   private static singUpBusiness = new SingUpBusiness(
     new UserDataBase(),
     new HashGenerator(),
     new TokenGenerator(),
-    new idGenerator()
+    new IdGenerator()
   );
   public async signUp(req: Request, res: Response) {
     const user = {

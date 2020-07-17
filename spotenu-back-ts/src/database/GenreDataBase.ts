@@ -19,10 +19,13 @@ export class GenreDataBase extends BaseDataBase {
     return "genre successfully added";
   }
 
-  public async getBands(): Promise<Genre | undefined> {
+  public async getGenres(): Promise<Genre | undefined> {
     const result = await this.getConnection().raw(`
-      SELECT * from '${GenreDataBase.TABLE_NAME}'
+      SELECT * from ${GenreDataBase.TABLE_NAME}
       `);
-    return this.toModel(result[0][0]);
+
+    return result[0].map((el: any) => {
+      return this.toModel(el);
+    });
   }
 }

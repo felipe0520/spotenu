@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Box } from "@material-ui/core";
-import orange from "@material-ui/core/colors/orange";
 
 export const FooterWrapper = styled(Box)`
   background-color: orange;

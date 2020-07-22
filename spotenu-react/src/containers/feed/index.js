@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FeedWrapper, Test } from "./styled";
 import Header from "../../components/header/";
 import Footer from "../../components/footer";

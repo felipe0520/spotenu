@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -7,7 +7,6 @@ import { Button, Typography } from "@material-ui/core";
 import { login } from "../../actions/login/";
 
 const LoginPage = () => {
-  // const [state, dispatch] = useReducer(reducer, initialState, init);
   const [userData, setUserData] = useState({
     name: "",
     password: "",

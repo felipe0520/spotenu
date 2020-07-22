@@ -15,11 +15,11 @@ export class AdminSeeAllController {
         token
       );
       res.status(200).send(result);
-      new UserDataBase().distroyConnection();
+      new UserDataBase().destroyConnection();
     } catch (error) {
       {
         res.status(400).send({ message: error.message });
-        new UserDataBase().distroyConnection();
+        new UserDataBase().destroyConnection();
       }
     }
   }

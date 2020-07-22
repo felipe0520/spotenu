@@ -1,36 +1,48 @@
-// import { BaseDataBase } from "./BaseDataBase";
-// import { Album } from "../model/Album";
+import { BaseDataBase } from "./BaseDataBase";
+import { Album } from "../model/Album";
 
-// export class AlbumDataBase extends BaseDataBase {
-//   protected static TABLE_NAME = "Album";
-//   protected static TABLE_NAME_Album_And_Genre = "AlbumAndGenre";
+export class AlbumDataBase extends BaseDataBase {
+  protected static TABLE_NAME = "Album";
+  protected static TABLE_NAME_Album_And_Genre = "AlbumAndGenre";
 
-//   private toModel(dbModel?: any): Album | undefined {
-//     return dbModel && new Album(dbModel.name, dbModel.id, dbModel.id_band);
-//   }
+  private toModel(dbModel?: any): Album | undefined {
+    return (
+      dbModel &&
+      new Album(dbModel.name, dbModel.id, dbModel.id_band, dbModel.genre)
+    );
+  }
 
-//   public async add(user: Album) {
-//     await this.getConnection().raw(`
-//     INSERT INTO ${AlbumDataBase.TABLE_NAME} (id, name, id_band)
-//     VALUES(
-//         "${user.getId()}",
-//         "${user.getName()}",
-//         "${user.getIdBand()}
-//     )
-//     `);
-//     await this.addJunctionAlbumAndGenre(user);
+  public async add(user: Album) {
+    await this.getConnection().raw(`
+    INSERT INTO ${AlbumDataBase.TABLE_NAME} (id, name, id_band)
+    VALUES(
+        "${user.getId()}",
+        "${user.getName()}",
+        "${user.getIdBand()}"
+    )
+    `);
+    const length = user.getGenreAlbumId().length;
 
-//     return "sucesso";
-//   }
+    for (let i = 0; i < length; i++) {
+      await this.addJunctionAlbumAndGenre({
+        idAlbum: user.getId(),
+        idGenre: user.getGenreAlbumId()[i],
+      });
+    }
 
-//   public async addJunctionAlbumAndGenre(user: Album) {
-//     await this.getConnection().raw(`
-//     INSERT INTO ${AlbumDataBase.TABLE_NAME_Album_And_Genre} (id, name, id_band)
-//     VALUES(
-//         "${user.getId()}",
-//         "${user.getName()}",
-//         "${user.getIdBand()}
-//     )
-//     `);
-//   }
-// }
+    return "album add successfully";
+  }
+
+  public async addJunctionAlbumAndGenre(user: {
+    idAlbum?: string;
+    idGenre: any;
+  }) {
+    await this.getConnection().raw(`
+    INSERT INTO ${AlbumDataBase.TABLE_NAME_Album_And_Genre} (id_album, id_genre)
+    VALUES(
+        "${user.idAlbum}",
+        "${user.idGenre}"
+    )
+    `);
+  }
+}

@@ -1,18 +1,19 @@
 import { TokenGenerator } from "../../services/TokenGenerator";
 import { UserRole } from "../../model/User";
 import { IdGenerator } from "../../services/IdGenerator";
-import { AlbumDataBase } from "../../database/AlbumDataBase";
-import { typeAddAlbum } from "./typeAddAlbum";
-import { Album } from "../../model/Album";
 
-export class BandAlbumBusiness {
+import { MusicDataBase } from "../../database/MusicDataBase";
+import { typeAddMusic } from "./typeAddMusic";
+import { Music } from "../../model/Music";
+
+export class BandMusicBusiness {
   constructor(
-    private albumDataBase: AlbumDataBase,
+    private musicDataBase: MusicDataBase,
     private IdGenerator: IdGenerator,
     private tokenGenerator: TokenGenerator
   ) {}
 
-  public async add(token: string | undefined, input: typeAddAlbum) {
+  public async add(token: string, DataMusic: typeAddMusic) {
     if (!token) {
       throw new Error("Nonexistent token ");
     }
@@ -24,8 +25,8 @@ export class BandAlbumBusiness {
 
     const id = this.IdGenerator.generate();
 
-    const result = await this.albumDataBase.add(
-      new Album(input.name, id, data.id, input.genreId)
+    const result = await this.musicDataBase.add(
+      new Music(DataMusic.name, id, DataMusic.albumId)
     );
 
     return result;

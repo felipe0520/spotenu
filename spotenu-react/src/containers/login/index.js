@@ -17,7 +17,6 @@ const LoginPage = () => {
     setUserData({ ...userData, [event.target.name]: event.target.value });
   };
   const handleLogin = (event) => {
-    console.log(userData);
     event.preventDefault();
     dispatch(login(userData));
   };

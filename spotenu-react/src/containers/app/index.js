@@ -5,7 +5,6 @@ import {
   MuiThemeProvider,
   createGenerateClassName,
   jssPreset,
-  CssBaseline,
 } from "@material-ui/core";
 import JssProvider from "react-jss/lib/JssProvider";
 import { create } from "jss";
@@ -38,7 +37,6 @@ export const App = () => (
   <Provider store={store}>
     <JssProvider jss={jss} generateClassName={generateClassName}>
       <MuiThemeProvider theme={theme}>
-        <CssBaseline />
         <Router history={history} />
       </MuiThemeProvider>
     </JssProvider>

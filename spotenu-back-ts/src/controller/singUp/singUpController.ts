@@ -34,12 +34,12 @@ export class SingUpController {
         authorization: user.authorization,
       });
       res.status(200).send({ token: result });
-      new UserDataBase().distroyConnection();
+      new UserDataBase().destroyConnection();
     } catch (error) {
       {
         res.status(400).send({ message: error.message });
       }
-      new UserDataBase().distroyConnection();
+      new UserDataBase().destroyConnection();
     }
   }
 }

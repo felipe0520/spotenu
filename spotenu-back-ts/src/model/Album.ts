@@ -3,7 +3,7 @@ export class Album {
     private name: string,
     private id: string,
     private idBand: string,
-    private GenreAlbum: string[]
+    private GenreAlbum: string[] | string
   ) {}
   public getId(): string {
     return this.id;
@@ -16,7 +16,7 @@ export class Album {
     return this.idBand;
   }
 
-  public getGenreAlbum(): string[] {
+  public getGenreAlbumId(): string[] | string {
     return this.GenreAlbum;
   }
 }

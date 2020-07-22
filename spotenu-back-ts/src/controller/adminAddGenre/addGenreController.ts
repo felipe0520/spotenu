@@ -22,11 +22,11 @@ export class AdminGenreController {
       );
 
       res.status(200).send(response);
-      new UserDataBase().distroyConnection();
+      new UserDataBase().destroyConnection();
     } catch (error) {
       {
         res.status(400).send({ message: error.message });
-        new UserDataBase().distroyConnection();
+        new UserDataBase().destroyConnection();
       }
     }
   }

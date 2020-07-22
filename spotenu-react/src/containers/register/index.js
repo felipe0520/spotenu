@@ -8,7 +8,7 @@ import SelectRegister from "../../components/selectRegister/index";
 import { signup } from "../../actions/signup/";
 
 const Register = () => {
-  const [userData, setname] = useState({
+  const [userData, setData] = useState({
     email: "",
     nickname: "",
     password: "",
@@ -20,7 +20,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    setname({ ...userData, [event.target.name]: event.target.value });
+    setData({ ...userData, [event.target.name]: event.target.value });
   };
 
   const handleSubmit = (event) => {

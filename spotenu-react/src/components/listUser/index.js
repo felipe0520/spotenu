@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -7,12 +8,15 @@ import AlbumIcon from "@material-ui/icons/Album";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import EmojiSymbolsIcon from "@material-ui/icons/EmojiSymbols";
-
-const Musicas = (index) => {
-  console.log(index);
-};
-
+import { getBands } from "../../actions/getBands/";
 const ListUser = () => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    dispatch(getBands(token));
+  }, []);
+
   return (
     <List>
       {["Musicas", "Gêneros musicais", "Bandas", "Álbuns"].map(

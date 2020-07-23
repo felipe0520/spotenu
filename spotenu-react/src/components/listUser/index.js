@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -8,78 +7,47 @@ import AlbumIcon from "@material-ui/icons/Album";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import EmojiSymbolsIcon from "@material-ui/icons/EmojiSymbols";
-import { getBands } from "../../actions/getBands/";
+import { getMusics } from "../../actions/getMusics/";
+import { useDispatch } from "react-redux";
 const ListUser = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    dispatch(getBands(token));
-  }, []);
+  const handleMusics = () => {
+    dispatch(getMusics(token));
+  };
 
+  const handleGenre = () => {
+    dispatch(getMusics(token));
+  };
+
+  const handleBands = () => {
+    dispatch(getMusics(token));
+  };
+
+  const handleAlbuns = () => {
+    dispatch(getMusics(token));
+  };
   return (
     <List>
-      {["Musicas", "Gêneros musicais", "Bandas", "Álbuns"].map(
-        (text, index) => (
-          <ListItem button key={text} onClick={() => `"${text}"`(index)}>
-            <ListItemIcon>
-              {index === 0 && <QueueMusicIcon />}
-              {index === 1 && <EmojiSymbolsIcon />}
-              {index === 2 && <LibraryMusicIcon />}
-              {index === 3 && <AlbumIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        )
-      )}
+      {[
+        { name: "Musicas", method: handleMusics },
+        { name: "Gêneros musicais", method: handleGenre },
+        { name: "Bandas", method: handleBands },
+        { name: "Albuns", method: handleAlbuns },
+      ].map((item, index) => (
+        <ListItem button key={item.name} onClick={item.method}>
+          <ListItemIcon>
+            {index === 0 && <QueueMusicIcon />}
+            {index === 1 && <EmojiSymbolsIcon />}
+            {index === 2 && <LibraryMusicIcon />}
+            {index === 3 && <AlbumIcon />}
+          </ListItemIcon>
+          <ListItemText primary={item.name} />
+        </ListItem>
+      ))}
     </List>
   );
 };
 
 export default ListUser;
-
-// <ListItem button key={text} onClick={() => Test0(index)}>
-// <ListItemIcon>
-//   {index === 0 && <QueueMusicIcon />}
-//   {index === 1 && <EmojiSymbolsIcon />}
-//   {index === 2 && <LibraryMusicIcon />}
-//   {index === 3 && <AlbumIcon />}
-// </ListItemIcon>
-// <ListItemText primary={text} />
-// </ListItem>
-
-{
-  /* <List>
-{["Musicas", "Gêneros musicais", "Bandas", "Álbuns"].map((text, index) =>
-  index === 0 ? (
-    <ListItem button key={text} onClick={() => Test0(index)}>
-      <ListItemIcon>
-        <QueueMusicIcon />
-      </ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItem>
-  ) : index === 1 ? (
-    <ListItem button key={text} onClick={() => Test0(index)}>
-      <ListItemIcon>
-        <LibraryMusicIcon />
-      </ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItem>
-  ) : index === 2 ? (
-    <ListItem button key={text} onClick={() => Test0(index)}>
-      <ListItemIcon>
-        <EmojiSymbolsIcon />
-      </ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItem>
-  ) : (
-    <ListItem button key={text} onClick={() => Test0(index)}>
-      <ListItemIcon>
-        <AlbumIcon />
-      </ListItemIcon>
-      <ListItemText primary={text} />
-    </ListItem>
-  )
-)}
-</List> */
-}

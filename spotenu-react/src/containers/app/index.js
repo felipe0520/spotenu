@@ -1,26 +1,13 @@
 import React from "react";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import {
-  MuiThemeProvider,
-  createGenerateClassName,
-  jssPreset,
-} from "@material-ui/core";
-import JssProvider from "react-jss/lib/JssProvider";
-import { create } from "jss";
+import { MuiThemeProvider } from "@material-ui/core";
 import theme from "../../theme/theme";
 import Router from "../../router/index";
 import { createBrowserHistory } from "history";
 import { createStore, applyMiddleware, compose } from "redux";
 import { generateReducers } from "../../reducers";
 import { routerMiddleware } from "connected-react-router";
-
-const generateClassName = createGenerateClassName();
-const jss = create({
-  ...jssPreset(),
-  // We define a custom insertion point that JSS will look for injecting the styles in the DOM.
-  insertionPoint: document.getElementById("jss-insertion-point"),
-});
 
 export const history = createBrowserHistory();
 

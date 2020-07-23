@@ -33,7 +33,6 @@ const LoginPage = () => {
             onChange={handleChange}
             name="name"
             value={userData.input}
-            required
           />
           <FormInput
             label="password"
@@ -42,7 +41,6 @@ const LoginPage = () => {
             onChange={handleChange}
             name="password"
             value={userData.password}
-            required
           />
           <Button type="submit" color="primary">
             Login

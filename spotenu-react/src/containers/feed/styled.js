@@ -7,6 +7,13 @@ export const FeedWrapper = styled.div`
   height: 77vh;
 `;
 
-export const Test = styled.div`
-  border: 1px solid black;
+export const WrapperPrincipalInfo = styled.div`
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  align-self: center;
 `;
+
+export const WrapperSecondaryInfo = styled.div``;
+
+export const WrapperMusic = styled.div``;

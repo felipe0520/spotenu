@@ -20,12 +20,12 @@ export class MusicDataBase extends BaseDataBase {
   public async getMusics() {
     const response = await this.getConnection().raw(
       `
-      SELECT  name, album_name from Music m
+      SELECT  name, album_name,  m.id from Music m
       join Album a
       on m.id_album = a.id;
       `
     );
-    console.log(response[0]);
+
     return response[0];
   }
 }

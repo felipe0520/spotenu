@@ -16,4 +16,16 @@ export class MusicDataBase extends BaseDataBase {
 
     return "music add successfully";
   }
+
+  public async getMusics() {
+    const response = await this.getConnection().raw(
+      `
+      SELECT  name, album_name from Music m
+      join Album a
+      on m.id_album = a.id;
+      `
+    );
+    console.log(response[0]);
+    return response[0];
+  }
 }

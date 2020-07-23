@@ -14,7 +14,7 @@ export class AlbumDataBase extends BaseDataBase {
 
   public async add(user: Album) {
     await this.getConnection().raw(`
-    INSERT INTO ${AlbumDataBase.TABLE_NAME} (id, name, id_band)
+    INSERT INTO ${AlbumDataBase.TABLE_NAME} (id, album_name, id_band)
     VALUES(
         "${user.getId()}",
         "${user.getName()}",
